@@ -11,7 +11,7 @@ variables:
 build:
   script:
     - npm ci
-    - ng build keycloak-angular
+    - npx ng build common
     - npm set "//$NEXUS_HOST/repository/npm-public/:_auth" "$(printf '%s:%s' ${NEXUS_USER} ${NEXUS_PASSWORD} | base64)"
     - npm set "//$NEXUS_HOST/repository/npm-hosted/:_auth" "$(printf '%s:%s' ${NEXUS_USER} ${NEXUS_PASSWORD} | base64)"
     - npm set always-auth true
