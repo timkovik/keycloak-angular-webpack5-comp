@@ -236,8 +236,8 @@ export class KeycloakService {
   public async init(options: KeycloakOptions = {}) {
     this.initServiceValues(options);
     const { config, initOptions } = options;
-
-    this._instance = new Keycloak(config);
+    const keycloak = Keycloak as any;
+    this._instance = new keycloak.default(config);
     this.bindsKeycloakEvents();
 
     const authenticated = await this._instance.init(initOptions);

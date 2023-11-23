@@ -1,0 +1,27 @@
+include:
+  - project: 'hyperion/templates'
+    file: 'Nodejs.gitlab-ci.yml'
+    ref: '0.27'
+
+variables:
+  NODE_MAJOR_VERSION: '16'
+  SONAR_EXCLUDE: 'src/assets'
+  IMAGE_CONTEXT: 'dist/keycloak-angular'
+
+build:
+  script:
+    - npm ci
+    - ng build keycloak-angular
+    - npm set "//$NEXUS_HOST/repository/npm-public/:_auth" "$(printf '%s:%s' ${NEXUS_USER} ${NEXUS_PASSWORD} | base64)"
+    - npm set "//$NEXUS_HOST/repository/npm-hosted/:_auth" "$(printf '%s:%s' ${NEXUS_USER} ${NEXUS_PASSWORD} | base64)"
+    - npm set always-auth true
+    - npm set strict-ssl false
+    - npm publish ./dist/keycloak-angular
+
+analyze:sonarqube:
+  rules:
+    - when: never
+
+lint:
+  rules:
+    - when: never

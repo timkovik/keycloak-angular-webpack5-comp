@@ -1,6 +1,6 @@
 {
-  "name": "keycloak-angular",
-  "version": "14.1.0",
+  "name": "keycloak-angular-webpack5-comp",
+  "version": "14.1.1",
   "description": "Easy Keycloak setup for Angular applications",
   "repository": {
     "type": "git",
